@@ -5,7 +5,7 @@ import type { AppType } from "next/dist/shared/lib/utils";
 import superjson from "superjson";
 import "../styles/globals.css";
 
-const MyApp: AppType = ({ Component, pageProps }) => {
+const App: AppType = ({ Component, pageProps }) => {
   return <Component {...pageProps} />;
 };
 
@@ -34,10 +34,20 @@ export default withTRPC<AppRouter>({
        * @link https://react-query.tanstack.com/reference/QueryClient
        */
       // queryClientConfig: { defaultOptions: { queries: { staleTime: 60 } } },
+
+      headers() {
+        if (ctx?.req) {
+          return {
+            ...ctx.req?.headers,
+          };
+        }
+
+        return {};
+      },
     };
   },
   /**
    * @link https://trpc.io/docs/ssr
    */
   ssr: false,
-})(MyApp);
+})(App);

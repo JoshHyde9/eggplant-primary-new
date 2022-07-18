@@ -14,28 +14,28 @@ datasource db {
 
 
 model User {
-    id String @id @default(uuid())
+    id         String @id @default(uuid())
 
-    firstName String
-    lastName String
-    email   String @unique
-    password    String
+    firstName  String
+    lastName   String
+    email      String     @unique
+    password   String
 
-    createdAt   DateTime @default(now())
-    updatedAt   DateTime @updatedAt
+    createdAt  DateTime @default(now())
+    updatedAt  DateTime @updatedAt
 
-    Post    Post[]
+    Post       Post[]
 }
 
 model Post {
-    id String @id @default(uuid())
+    id         String @id @default(uuid())
 
-    title String
-    content String @db.LongText
+    title      String
+    content    String @db.LongText
 
-    user User @relation(fields: [userId], references: [id])
-    userId String
+    user       User @relation(fields: [userId], references: [id])
+    userId     String
 
-    createdAt   DateTime @default(now())
-    updatedAt   DateTime @updatedAt
+    createdAt  DateTime @default(now())
+    updatedAt  DateTime @updatedAt
 }
